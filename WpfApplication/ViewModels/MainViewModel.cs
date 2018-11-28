@@ -18,6 +18,7 @@ namespace WpfApplication
 
         public bool HousesNotEmpty { get; set; }
         public bool UsersNotEmpty { get; set; }
+        public bool PhonesNotEmpty { get; set; }
 
         HousesDataSet housesDataSet;
         UsersDataSet usersDataSet;
@@ -25,17 +26,17 @@ namespace WpfApplication
         public Command NextHouseCommand { get; set; }
         public Command PrevHouseCommand { get; set; }
         public Command NewHouseCommand { get; set; }
-        public Command SaveHouseCommand { get; set; }
         public Command DeleteHouseCommand { get; set; }
 
         public Command NextUserCommand { get; set; }
         public Command PrevUserCommand { get; set; }
         public Command NewUserCommand { get; set; }
-        public Command SaveUserCommand { get; set; }
         public Command DeleteUserCommand { get; set; }
 
         public Command<Phone> DeletePhoneCommand { get; set; }
         public Command AddPhoneCommand { get; set; }
+
+        public Command SaveDataCommand { get; set; }
 
         public House CurrentHouse { get; set; }
         public User CurrentUser { get; set; }
@@ -51,17 +52,17 @@ namespace WpfApplication
             NextHouseCommand = new Command(NextHouse);
             PrevHouseCommand = new Command(PrevHouse);
             NewHouseCommand = new Command(NewHouse);
-            SaveHouseCommand = new Command(SaveHouse);
             DeleteHouseCommand = new Command(DeleteHouse);
 
             NextUserCommand = new Command(NextUser);
             PrevUserCommand = new Command(PrevUser);
             NewUserCommand = new Command(NewUser);
-            SaveUserCommand = new Command(SaveUser);
             DeleteUserCommand = new Command(DeleteUser);
 
             DeletePhoneCommand = new Command<Phone>(ExecuteDeletePhoneCommand);
             AddPhoneCommand = new Command(AddPhone);
+
+            SaveDataCommand = new Command(SaveAllData);
 
             currentHouseIndex = 0;
             currentUserIndex = 0;
@@ -72,8 +73,7 @@ namespace WpfApplication
             HousesNotEmpty = housesDataSet.D.Items.Count != 0 ? true : false;
             UsersNotEmpty = usersDataSet.D.Items.Count != 0 ? true : false;
         }
-
-
+        
         #endregion
 
         #region house object behaviour
@@ -107,11 +107,11 @@ namespace WpfApplication
             }
         }
 
-        private void SaveHouse()
+        /*private void SaveHouse()
         {
             housesDataSet.D.Items[currentHouseIndex] = CurrentHouse;
         }
-
+        */
         private void DeleteHouse()
         {
             housesDataSet.D.Items.RemoveAt(currentHouseIndex);
@@ -135,8 +135,7 @@ namespace WpfApplication
         }
 
         #endregion
-
-
+        
 
         #region user object behaviour
 
@@ -145,6 +144,7 @@ namespace WpfApplication
             CurrentUser = usersDataSet.D.Items[index];
             NextUserCommand.IsEnabled = currentUserIndex < (usersDataSet.D.Items.Count - 1);
             PrevUserCommand.IsEnabled = currentUserIndex > 0;
+            PhonesNotEmpty = CurrentUser.Phones.Count == 0 ? false : true;
         }
 
         private void NextUser()
@@ -168,12 +168,12 @@ namespace WpfApplication
                 UsersNotEmpty = true;
             }
         }
-
+        /*
         private void SaveUser()
         {
             usersDataSet.D.Items[currentUserIndex] = CurrentUser;
         }
-
+        */
         private void DeleteUser()
         {
             usersDataSet.D.Items.RemoveAt(currentUserIndex);
@@ -207,20 +207,29 @@ namespace WpfApplication
                 Value = ""
             };
             if (CurrentUser.Phones == null)
+            {
                 CurrentUser.Phones = new ObservableCollection<Phone>();
+            }
+
             CurrentUser.Phones.Add(phone);
+
+            PhonesNotEmpty = true;
         }
         
         private void ExecuteDeletePhoneCommand(Phone phone)
         {
             CurrentUser.Phones.Remove(phone);
+            if (CurrentUser.Phones.Count == 0)
+            {
+                PhonesNotEmpty = false;
+            }
         }
 
         #endregion
 
         #region Save Data
 
-        void SaveAllData()
+        private void SaveAllData()
         {
             JSONData.HousesDataSet = housesDataSet;
             JSONData.UsersDataSet = usersDataSet;
