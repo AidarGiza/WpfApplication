@@ -1,0 +1,17 @@
+D:\Projects\CS\WpfApplication\WpfApplication\bin\Debug\WpfApplication.exe
+D:\Projects\CS\WpfApplication\WpfApplication\bin\Debug\WpfApplication.pdb
+D:\Projects\CS\WpfApplication\WpfApplication\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\CS\WpfApplication\WpfApplication\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\CS\WpfApplication\WpfApplication\obj\Debug\WpfApplication.csprojAssemblyReference.cache
+D:\Projects\CS\WpfApplication\WpfApplication\obj\Debug\Views\MainWindow.g.cs
+D:\Projects\CS\WpfApplication\WpfApplication\obj\Debug\App.g.cs
+D:\Projects\CS\WpfApplication\WpfApplication\obj\Debug\WpfApplication_MarkupCompile.cache
+D:\Projects\CS\WpfApplication\WpfApplication\obj\Debug\WpfApplication_MarkupCompile.lref
+D:\Projects\CS\WpfApplication\WpfApplication\obj\Debug\Views\MainWindow.baml
+D:\Projects\CS\WpfApplication\WpfApplication\obj\Debug\WpfApplication.g.resources
+D:\Projects\CS\WpfApplication\WpfApplication\obj\Debug\WpfApplication.Properties.Resources.resources
+D:\Projects\CS\WpfApplication\WpfApplication\obj\Debug\WpfApplication.csproj.GenerateResource.cache
+D:\Projects\CS\WpfApplication\WpfApplication\obj\Debug\WpfApplication.csproj.CoreCompileInputs.cache
+D:\Projects\CS\WpfApplication\WpfApplication\obj\Debug\WpfApplication.csproj.CopyComplete
+D:\Projects\CS\WpfApplication\WpfApplication\obj\Debug\WpfApplication.exe
+D:\Projects\CS\WpfApplication\WpfApplication\obj\Debug\WpfApplication.pdb
