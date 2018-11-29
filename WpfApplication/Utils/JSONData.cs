@@ -76,7 +76,7 @@ namespace WpfApplication
                         dataSetNum++;
                     }
                     // В остальных случаях добавить строку к к текущему элементу списка json данных, который определяется счетчиком
-                    else if (dataSetNum > 0)
+                    else if (dataSetNum >= 0)
                     {
                         jsonDataSet[dataSetNum] += line;
                     } 
