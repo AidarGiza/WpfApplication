@@ -7,9 +7,13 @@ namespace WpfApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Стандартный конструктор
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
+            // создание модели представления
             DataContext = new MainViewModel();
         }
     }

@@ -17,9 +17,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            
+            <!-- Кнопка для сохранения данных -->
             <StackPanel Orientation="Horizontal">
                 <Button Content="Сохранить" Command="{Binding SaveDataCommand}" Padding="3" Margin="5"/>
             </StackPanel>
+
+            <!-- Кнопки для перехода между данными о домах -->
             <StackPanel VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -30,6 +34,8 @@
                     <Button Command="{Binding NextHouseCommand}" Margin="6 2" Grid.Column="1" Content="Следующий"/>
                 </Grid>
             </StackPanel>
+            
+            <!-- Кнопки для перехода между данными о ползователях -->
             <StackPanel VerticalAlignment="Bottom" Grid.Column="1" Grid.Row="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -40,27 +46,36 @@
                     <Button Command="{Binding NextUserCommand}" Margin="6 2" Grid.Column="1" Content="Следующий"/>
                 </Grid>
             </StackPanel>
-            <StackPanel Margin="5" Grid.Column="0" Grid.Row="2">
-                        <TextBlock Padding="3" FontWeight="Bold" Text="Адреса"/>
-                        <TextBlock Text="Наименование"/>
-                        <TextBox Margin="2" IsEnabled="{Binding HousesNotEmpty}" Text="{Binding CurrentHouse.Name}"/>
-                        <TextBlock Text="Адрес"/>
-                        <TextBox Margin="2" IsEnabled="{Binding HousesNotEmpty}" Text="{Binding CurrentHouse.Address}"/>
-                        <TextBlock Text="Тип"/>
-                        <TextBox Margin="2" IsEnabled="{Binding HousesNotEmpty}" Text="{Binding CurrentHouse.Type}"/>
-                        <TextBlock Text="Количество этажей"/>
-                        <TextBox Margin="2" IsEnabled="{Binding HousesNotEmpty}" Text="{Binding CurrentHouse.Flors}"/>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Button Command="{Binding NewHouseCommand}" Margin="0 0 3 0" Grid.Column="0" Content="Новый"/>
-                            <Button Command="{Binding DeleteHouseCommand}" Margin="3 0 3 0" Grid.Column="1" Content="Удалить"/>
 
-                        </Grid>
-                    </StackPanel>
+            <!-- Данные о доме -->
+            <StackPanel Margin="5" Grid.Column="0" Grid.Row="2">
+                
+                <!-- Элементы отображения и редактирования данных о доме -->
+                <TextBlock Padding="3" FontWeight="Bold" Text="Адреса"/>
+                <TextBlock Text="Наименование"/>
+                <TextBox Margin="2" IsEnabled="{Binding HousesNotEmpty}" Text="{Binding CurrentHouse.Name}"/>
+                <TextBlock Text="Адрес"/>
+                <TextBox Margin="2" IsEnabled="{Binding HousesNotEmpty}" Text="{Binding CurrentHouse.Address}"/>
+                <TextBlock Text="Тип"/>
+                <TextBox Margin="2" IsEnabled="{Binding HousesNotEmpty}" Text="{Binding CurrentHouse.Type}"/>
+                <TextBlock Text="Количество этажей"/>
+                <TextBox Margin="2" IsEnabled="{Binding HousesNotEmpty}" Text="{Binding CurrentHouse.Flors}"/>
+
+                <!-- Кнопки для управления данными о доме -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Command="{Binding NewHouseCommand}" Margin="0 0 3 0" Grid.Column="0" Content="Новый"/>
+                    <Button Command="{Binding DeleteHouseCommand}" Margin="3 0 3 0" Grid.Column="1" Content="Удалить"/>
+                </Grid>
+            </StackPanel>
+            
+            <!-- Данные о пользователе -->
             <StackPanel Margin="5" Grid.Column="1" Grid.Row="2">
+                
+                <!-- Элементы отображения и редактирования данных о пользователе -->
                 <TextBlock Padding="3" FontWeight="Bold" Text="Пользователи"/>
                 <TextBlock Text="Имя"/>
                 <TextBox Margin="2" IsEnabled="{Binding UsersNotEmpty}" Text="{Binding CurrentUser.Name}"/>
@@ -69,6 +84,8 @@
                 <TextBlock Text="Группа"/>
                 <TextBox Margin="2" IsEnabled="{Binding UsersNotEmpty}" Text="{Binding CurrentUser.Group}"/>
                 <TextBlock Padding="3" FontWeight="Bold" Text="Номера телефонов" />
+                
+                <!-- Список телефонов пользователя -->
                 <ItemsControl x:Name="PhoneList" ItemsSource="{Binding CurrentUser.Phones}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -90,6 +107,8 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+                
+                <!-- Кнопки для управления данными о пользователе -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -100,6 +119,7 @@
                     <Button Command="{Binding AddPhoneCommand}" Margin="3 0 3 0" Grid.Column="1" Content="Доб. тел."/>
                     <Button Command="{Binding DeleteUserCommand}" Margin="3 0 3 0" Grid.Column="2" Content="Удалить"/>
                 </Grid>
+                
             </StackPanel>
         </Grid>
     </Border>

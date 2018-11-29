@@ -267,7 +267,6 @@ namespace WpfApplication
 
         #endregion
         
-
         #region user object behaviour
         
         /// <summary>
