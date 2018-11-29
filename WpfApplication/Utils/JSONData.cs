@@ -6,14 +6,40 @@ namespace WpfApplication
 {
     static class JSONData
     {
+        /// <summary>
+        /// Список наборов данных из файла
+        /// </summary>
         private static List<string> jsonDataSet = new List<string>();
-        private static int fileNum = 0;
+
+        /// <summary>
+        /// Счетчик считанных наборов данных
+        /// </summary>
+        private static int dataSetNum = 0;
+
+        /// <summary>
+        /// Начало json данных
+        /// </summary>
         private static string startData = "-----";
+
+        /// <summary>
+        /// конец json данных
+        /// </summary>
         private static string endData = "/-----";
 
+        /// <summary>
+        /// Набор данных о домах
+        /// </summary>
         public static HousesDataSet HousesDataSet { get; set; }
+
+        /// <summary>
+        /// Набор данных о пользователях
+        /// </summary>
         public static UsersDataSet UsersDataSet { get; set; }
         
+        /// <summary>
+        /// Десериализация файла
+        /// </summary> 
+        /// <param name="inputFilePath">Путь к JSON файлу</param>
         public static void DeserializeJsonFile(string inputFilePath)
         {
             using (StreamReader sr = File.OpenText(inputFilePath))
@@ -27,34 +53,31 @@ namespace WpfApplication
                     }
                     else if (line.Equals(endData))
                     {
-                        fileNum++;
+                        dataSetNum++;
                     }
-                    else jsonDataSet[fileNum] += line;
+                    else jsonDataSet[dataSetNum] += line;
                 }
             }
 
             foreach (string jsonData in jsonDataSet)
             {
-                DeserializeJSON(jsonData);
+                DataType dt = JsonConvert.DeserializeObject<DataType>(jsonData);
+
+                if (dt.Q.Equals("HOUSES"))
+                {
+                    HousesDataSet = JsonConvert.DeserializeObject<HousesDataSet>(jsonData);
+                }
+                else if (dt.Q.Equals("USERS"))
+                {
+                    UsersDataSet = JsonConvert.DeserializeObject<UsersDataSet>(jsonData);
+                }
             }
         }
 
-        private static void DeserializeJSON(string jText)
-        {
-
-            DataType dt = JsonConvert.DeserializeObject<DataType>(jText);
-
-            if (dt.Q.Equals("HOUSES"))
-            {
-                HousesDataSet = JsonConvert.DeserializeObject<HousesDataSet>(jText);
-
-            }
-            else if (dt.Q.Equals("USERS"))
-            {
-                UsersDataSet = JsonConvert.DeserializeObject<UsersDataSet>(jText);
-            }
-        }
-        
+        /// <summary>
+        /// Сериализация данных и сохранение в файл
+        /// </summary>
+        /// <param name="outputFilePath">Путь к файлу для сохранения</param>
         public static void SaveDataToFile(string outputFilePath)
         {
             using (StreamWriter file = File.CreateText(outputFilePath))

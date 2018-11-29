@@ -3,9 +3,16 @@ using System.Windows.Input;
 
 namespace WpfApplication
 {
+    /// <summary>
+    /// Команда для выполнения действия <see cref="Action"/>
+    /// </summary>
     public class Command : ICommand
     {
         private bool _isEnabled = true;
+
+        /// <summary>
+        /// Возможность выполнения комманды
+        /// </summary>
         public bool IsEnabled
         {
             get
@@ -18,8 +25,11 @@ namespace WpfApplication
                 CanExecuteChanged?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        /// <summary>
+        /// Действие выполняемое командой
+        /// </summary>
         public Action Action { get; set; }
-        public string DisplayName { get; set; }
         public event EventHandler CanExecuteChanged;
 
         public Command(Action action)
@@ -32,6 +42,10 @@ namespace WpfApplication
             return IsEnabled;
         }
 
+        /// <summary>
+        /// Выполнить действие <see cref="Action"/>
+        /// </summary>
+        /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
             Action?.Invoke();
