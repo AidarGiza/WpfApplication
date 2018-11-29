@@ -18,12 +18,12 @@ namespace WpfApplication
         /// <summary>
         /// Полный путь ко входному JSON файлу
         /// </summary>
-        private string inputFilePath = @"D:\Projects\CS\WpfApplication\input";
+        private string inputFilePath = @"input";
 
         /// <summary>
         /// Полный путь к выходному JSON файлу
         /// </summary>
-        private string outputFilePath = @"D:\Projects\CS\WpfApplication\output";
+        private string outputFilePath = @"output";
 
         /// <summary>
         /// Индекс текущего элемента из набора данных о домах
@@ -159,17 +159,40 @@ namespace WpfApplication
 
             SaveDataCommand = new Command(SaveAllData);
 
-            //Присваивание нулевых значений идекса
-            currentHouseIndex = 0;
-            currentUserIndex = 0;
+            // Если набор данных существует
+            if (housesDataSet != null)
+            {
+                // Присваивание нулевых значений идекса
+                currentHouseIndex = 0;
+                // Определение не пуст ли набор данных
+                HousesNotEmpty = housesDataSet.D.Items.Count != 0 ? true : false;
+                // Если набор данных не пуст
+                if (HousesNotEmpty)
+                {
+                    // Показ первых элементов наборов данных
+                    ShowHouse(currentHouseIndex);
+                }
+            }
+            // Иначе, присвоить текущему элементу пустое значение
+            else CurrentHouse = null;
 
-            //Показ первых элементов наборов данных
-            ShowHouse(currentHouseIndex);
-            ShowUser(currentUserIndex);
+            // Если набор данных существует
+            if (usersDataSet != null)
+            {
+                // Присваивание нулевых значений идекса
+                currentUserIndex = 0;
+                // Определение не пуст ли набор данных
+                UsersNotEmpty = usersDataSet.D.Items.Count != 0 ? true : false;
+                // Если набор данных не пуст
+                if (UsersNotEmpty)
+                {
+                    // Показ первых элементов наборов данных
+                    ShowUser(currentUserIndex);
+                }
+            }
+            // Иначе, присвоить текущему элементу пустое значение
+            else CurrentUser = null;
 
-            //Определение не пусты ли наборы данных 
-            HousesNotEmpty = housesDataSet.D.Items.Count != 0 ? true : false;
-            UsersNotEmpty = usersDataSet.D.Items.Count != 0 ? true : false;
         }
         
         #endregion
